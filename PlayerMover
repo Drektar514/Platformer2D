@@ -7,13 +7,13 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private float moveInput;
+    [SerializeField] private float _moveInput;
     [SerializeField] private bool _isGround;
 
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    
+
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -29,18 +29,18 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        moveInput = Input.GetAxis("Horizontal");
+        _moveInput = Input.GetAxis("Horizontal");
 
-        if (moveInput < 0)
+        if (_moveInput < 0)
         {
             _spriteRenderer.flipX = true;
         }
-        else if(moveInput > 0)
+        else if(_moveInput > 0)
         {
             _spriteRenderer.flipX = false;
         }
-        _animator.SetFloat("Speed", Mathf.Abs(moveInput));
-        _rigidbody2D.velocity = new Vector2(moveInput * _speed, _rigidbody2D.velocity.y);
+        _animator.SetFloat("Speed", Mathf.Abs(_moveInput));
+        _rigidbody2D.velocity = new Vector2(_moveInput * _speed, _rigidbody2D.velocity.y);
     }
 
     private void Jump()
@@ -59,7 +59,7 @@ public class PlayerMover : MonoBehaviour
             _isGround = true;
         }
     }
-    
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))
