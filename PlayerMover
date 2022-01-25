@@ -1,8 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -13,6 +11,8 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    private const string SpeedAnimation = "Speed"; 
+    private const string JumpAnimation = "IsGround"; 
 
     private void Start()
     {
@@ -39,13 +39,13 @@ public class PlayerMover : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
-        _animator.SetFloat("Speed", Mathf.Abs(_moveInput));
+        _animator.SetFloat(SpeedAnimation, Mathf.Abs(_moveInput));
         _rigidbody2D.velocity = new Vector2(_moveInput * _speed, _rigidbody2D.velocity.y);
     }
 
     private void Jump()
     {
-        _animator.SetBool("IsGround", _isGround);
+        _animator.SetBool(JumpAnimation, _isGround);
         if(_isGround && Input.GetKeyDown(KeyCode.Space))
         {
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
