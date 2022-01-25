@@ -8,7 +8,7 @@ public class Gold : MonoBehaviour
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            player.GetGold(_worth);
+            wallet.AddGold(_worth);
             Destroy(gameObject);
         }
     }
