@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Gold : MonoBehaviour
 {
-    [SerializeField] private int _gold;
-    
+    [SerializeField] private int _worth;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            player.GetGold(_gold);
+            player.GetGold(_worth);
             Destroy(gameObject);
         }
     }
