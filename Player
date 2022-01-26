@@ -1,0 +1,16 @@
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    private Wallet _wallet;
+
+    private void Start()
+    {
+        _wallet = GetComponent<Wallet>();
+    }
+
+    public void AddGoldToWallet(int gold)
+    {
+        _wallet.AddGold(gold);
+    }
+}
