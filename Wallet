@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    [SerializeField] private int _gold;
+    public int Gold { get; private set; }
 
     public void AddGold(int gold)
     {
-        _gold += gold;
+        Gold += gold;
     }
 }
